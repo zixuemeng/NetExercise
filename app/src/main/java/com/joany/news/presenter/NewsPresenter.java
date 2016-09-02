@@ -29,6 +29,7 @@ public class NewsPresenter {
     private Action1<? super Object> newsEventAction = new Action1<Object>() {
         @Override
         public void call(Object o) {
+            //判断id是否相同，若不判断所有界面都会更改内容
             if(o instanceof NewsEvent && ((NewsEvent) o).getNewsType().equals(Constant.getID(titleId))) {
                 if(((NewsEvent) o).getResult().equals(Constant.Result.SUCCESSS)){
                     if(newsInterface != null) {

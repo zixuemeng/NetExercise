@@ -60,6 +60,7 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailI
 
         collapsingToolbarLayout.setTitle(newsEntity.getTitle());
 
+        //Glide:an image loading and caching library for Android focused on smooth scrolling
         Glide.with(this).load(newsEntity.getPicUrl()).into(imageView);
 
         newsDetailPresenter = new NewsDetailPresenter(this);

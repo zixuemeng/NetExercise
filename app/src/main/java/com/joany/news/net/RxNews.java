@@ -1,8 +1,17 @@
 package com.joany.news.net;
 
+import com.google.gson.Gson;
+import com.joany.greendao.DBHelper;
+import com.joany.greendao.GreenRxNews;
+import com.joany.greendao.GreenRxNewsDao;
+import com.joany.news.base.BaseApplication;
 import com.joany.news.bean.NewsResponse;
 import com.joany.news.event.NewsEvent;
 
+import java.util.List;
+
+import de.greenrobot.dao.query.DeleteQuery;
+import de.greenrobot.dao.query.Query;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -47,11 +56,26 @@ public class RxNews {
     }
 
     public static void setCacheNews(NewsResponse newsResponse,String id) {
-        //TODO:
+        GreenRxNewsDao greenRxNewsDao = DBHelper.getInstance(BaseApplication.getContext())
+                .getDaoSession().getGreenRxNewsDao();
+        DeleteQuery deleteQuery = greenRxNewsDao.queryBuilder()
+                .where(GreenRxNewsDao.Properties.Type.eq(id)).buildDelete();
+        deleteQuery.executeDeleteWithoutDetachingEntities();
+        String news = new Gson().toJson(newsResponse);
+        GreenRxNews greenRxNews = new GreenRxNews(null,news,id);
+        greenRxNewsDao.insert(greenRxNews);
     }
 
     public static NewsResponse getCacheNews(String id){
-        //TODO:
-        return null;
+        NewsResponse newsResponse = null;
+        GreenRxNewsDao greenRxNewsDao = DBHelper.getInstance(BaseApplication.getContext())
+                .getDaoSession().getGreenRxNewsDao();
+        Query query = greenRxNewsDao.queryBuilder()
+                .where(GreenRxNewsDao.Properties.Type.eq(id)).build();
+        List<GreenRxNews> greenRxNewses = query.list();
+        if(greenRxNewses != null && greenRxNewses.size() > 0) {
+            newsResponse = new Gson().fromJson(greenRxNewses.get(0).getNewsResponse(),NewsResponse.class);
+        }
+        return newsResponse;
     }
 }
