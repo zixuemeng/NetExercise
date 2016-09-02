@@ -7,14 +7,14 @@ import android.os.Parcelable;
  * Created by joany on 2016/9/1.
  */
 public class NewsEntity implements Parcelable {
-    private String time;
+    private String ctime;
     private String title;
     private String description;
-    private String pictureUrl;
+    private String picUrl;
     private String url;
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCtime(String ctime) {
+        this.ctime = ctime;
     }
 
     public void setTitle(String title) {
@@ -25,16 +25,16 @@ public class NewsEntity implements Parcelable {
         this.description = description;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setPicUrl(String pictureUrl) {
+        this.picUrl = picUrl;
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public String gettime() {
-        return time;
+    public String getCtime() {
+        return ctime;
     }
 
     public String getTitle() {
@@ -45,8 +45,8 @@ public class NewsEntity implements Parcelable {
         return description;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getPicUrl() {
+        return picUrl;
     }
 
     public String getUrl() {
@@ -55,10 +55,10 @@ public class NewsEntity implements Parcelable {
 
 
     protected NewsEntity(Parcel source) {
-        this.time = source.readString();
+        this.ctime = source.readString();
         this.title = source.readString();
         this.description = source.readString();
-        this.pictureUrl = source.readString();
+        this.picUrl = source.readString();
         this.url = source.readString();
     }
 
@@ -69,10 +69,10 @@ public class NewsEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int i) {
-        dest.writeString(this.time);
+        dest.writeString(this.ctime);
         dest.writeString(this.title);
         dest.writeString(this.description);
-        dest.writeString(this.pictureUrl);
+        dest.writeString(this.picUrl);
         dest.writeString(this.url);
     }
 
@@ -90,10 +90,10 @@ public class NewsEntity implements Parcelable {
 
     @Override
     public String toString() {
-        return "time='" + time + '\'' +
+        return "time='" + ctime + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", picureUrl='" + pictureUrl + '\'' +
+                ", picureUrl='" + picUrl + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }

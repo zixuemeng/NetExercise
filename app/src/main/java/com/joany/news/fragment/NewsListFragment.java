@@ -66,7 +66,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_news_list,container,false);
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
 
         swipeRefreshLayout.setColorSchemeColors(R.color.colorAccent,
                 R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorAccent);
@@ -81,7 +81,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         recyclerView.setAdapter(adapter);
         recyclerView.setOnScrollListener(onScrollListener);
 
-        newsPresenter = new NewsPresenter(this);
+        newsPresenter = new NewsPresenter(this,titleId);
         onRefresh();
         return v;
     }
@@ -105,6 +105,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
         }
     };
+
     private RecyclerViewAdapter.OnItemClickListener onItemClickListener =
             new RecyclerViewAdapter.OnItemClickListener() {
         @Override
@@ -128,7 +129,9 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         if(data == null) {
             data = new ArrayList<>();
         }
-        data.addAll(list);
+        if(list != null) {
+            data.addAll(list);
+        }
         if(pageIndex == 1) {
             adapter.setData(data);
         } else {
@@ -162,7 +165,7 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
         View v = getActivity() == null ? recyclerView.getRootView()
                 :recyclerView.findViewById(R.id.drawer_layout);
-        Snackbar.make(v,"加载失败",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(v,"加载失败", Snackbar.LENGTH_LONG).show();
     }
 
     @Override

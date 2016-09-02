@@ -12,7 +12,7 @@ import java.util.List;
 public class NewsResponse implements Parcelable {
     private int code;
     private String msg;
-    private List<NewsEntity> newsList;
+    private List<NewsEntity> newslist;
 
     public void setCode(int code) {
         this.code = code;
@@ -23,7 +23,7 @@ public class NewsResponse implements Parcelable {
     }
 
     public void setNewslist(List<NewsEntity> newsList) {
-        this.newsList = newsList;
+        this.newslist = newsList;
     }
 
     public int getCode() {
@@ -35,14 +35,17 @@ public class NewsResponse implements Parcelable {
     }
 
     public List<NewsEntity> getNewslist() {
-        return newsList;
+        return newslist;
+    }
+
+    public NewsResponse(){
     }
 
     protected NewsResponse(Parcel source) {
         this.code = source.readInt();
         this.msg = source.readString();
-        this.newsList = new ArrayList<>();
-        source.readList(this.newsList,List.class.getClassLoader());
+        this.newslist = new ArrayList<>();
+        source.readList(this.newslist,List.class.getClassLoader());
     }
 
     @Override
@@ -54,7 +57,7 @@ public class NewsResponse implements Parcelable {
     public void writeToParcel(Parcel dest, int i) {
         dest.writeInt(this.code);
         dest.writeString(this.msg);
-        dest.writeList(this.newsList);
+        dest.writeList(this.newslist);
     }
 
     public static final Creator<NewsResponse> CREATOR = new Creator<NewsResponse>() {
@@ -74,7 +77,7 @@ public class NewsResponse implements Parcelable {
         return "NewsResponse{" +
                 "code='" + code + '\'' +
                 ", msg='" + msg + '\'' +
-                ", newsListSize=" + newsList.size() +
+                ", newsListSize=" + newslist.size() +
                 "}";
     }
 }

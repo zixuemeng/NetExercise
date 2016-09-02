@@ -37,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnItemClickListener{
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -88,7 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(newsEntity != null) {
                 ((ItemViewHolder) holder).title.setText(newsEntity.getTitle());
                 ((ItemViewHolder) holder).description.setText(newsEntity.getDescription());
-                Glide.with(context).load(newsEntity.getPictureUrl()).error(R.mipmap.ic_load_fail)
+                Glide.with(context).load(newsEntity.getPicUrl()).error(R.mipmap.ic_load_fail)
                         .placeholder(R.mipmap.ic_loading).into(((ItemViewHolder) holder).newsImg);
             }
         }

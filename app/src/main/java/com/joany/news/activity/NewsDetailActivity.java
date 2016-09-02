@@ -60,7 +60,7 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailI
 
         collapsingToolbarLayout.setTitle(newsEntity.getTitle());
 
-        Glide.with(this).load(newsEntity.getPictureUrl()).into(imageView);
+        Glide.with(this).load(newsEntity.getPicUrl()).into(imageView);
 
         newsDetailPresenter = new NewsDetailPresenter(this);
         newsDetailPresenter.loadNewsDetail(newsEntity.getUrl());
