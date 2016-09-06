@@ -72,8 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_news_list_item, parent, false);
-            ItemViewHolder ivh = new ItemViewHolder(v);
-            return ivh;
+            return new ItemViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.footer,parent,false);

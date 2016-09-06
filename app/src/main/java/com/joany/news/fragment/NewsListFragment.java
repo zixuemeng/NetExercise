@@ -2,7 +2,6 @@ package com.joany.news.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.joany.news.NewsInterface;
 import com.joany.news.R;
 import com.joany.news.activity.NewsDetailActivity;
 import com.joany.news.adapter.RecyclerViewAdapter;
+import com.joany.news.base.BaseApplication;
 import com.joany.news.bean.NewsEntity;
 import com.joany.news.net.Constant;
 import com.joany.news.presenter.NewsPresenter;
@@ -162,9 +163,8 @@ public class NewsListFragment extends Fragment implements SwipeRefreshLayout.OnR
             adapter.setShowFooter(false);
             adapter.notifyDataSetChanged();
         }
-        View v = getActivity() == null ? recyclerView.getRootView()
-                :recyclerView.findViewById(R.id.drawer_layout);
-        Snackbar.make(v,"加载失败", Snackbar.LENGTH_LONG).show();
+
+        Toast.makeText(BaseApplication.getContext(),"加载失败",Toast.LENGTH_LONG).show();
     }
 
     @Override
